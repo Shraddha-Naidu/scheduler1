@@ -14,6 +14,7 @@ import Appointment from "components/Appointment";
 import Header from "components/Appointment/Header";
 import Empty from "components/Appointment/Empty";
 import Show from "components/Appointment/Show";
+import Status from "components/Appointment/Status"
 
 storiesOf("Button", module)
   .addParameters({
@@ -167,5 +168,11 @@ storiesOf("Appointment", module)
             message="Delete the appointment?"
             onConfirm={action("onConfirm")}
             onCancel={action("onCancel")}
+          />
+        ));
+
+        .add("Status", () => (
+          <Status
+            message="Deleting"
           />
         ));
