@@ -130,6 +130,6 @@ storiesOf("Button", module)
         .add("Clickable", () => (
           <InterviewerList
             interviewers={interviewers}
-            setInterviewer={action("setInterviewer")}
+            onChange={action("setInterviewer")}
           />
         ));
