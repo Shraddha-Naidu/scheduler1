@@ -10,7 +10,17 @@ export default function DayListItem(props) {
     "day-list__item--selected": props.selected,
     "day-list__item--full": props.spots === 0
   });
-  
+
+  const formatSpots = function () {
+    let remainingSpots;
+     if (props.spots === 0) {
+       remainingSpots = "no spots remaining"
+     } else if (props.spots > 0) {
+       remainingSpots = `${props.spots}${props.spots === 1 ? ' spot ': ' spots '} remaining`;
+     }
+     return remainingSpots;
+  };
+
   return (
 
     <li
