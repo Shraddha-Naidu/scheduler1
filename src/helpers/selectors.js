@@ -7,9 +7,9 @@ export function getAppointmentsForDay(state, day) {
     }
   }
 
-  const available = appointments.map(app => {
+  const existing = appointments.map(app => {
       return state.appointments[app]
     })
 
-  return available;
+  return existing;
 }
