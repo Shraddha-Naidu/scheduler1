@@ -11,11 +11,11 @@ import DayList from "components/DayList";
 import InterviewerListItem from "components/InterviewerListItem";
 import InterviewerList from "components/InterviewerList";
 import Appointment from "components/Appointment";
-import Header from "components/Appointment/Header";
+/* import Header from "components/Appointment/Header";
 import Empty from "components/Appointment/Empty";
 import Show from "components/Appointment/Show";
 import Status from "components/Appointment/Status";
-import Error from "components/Appointment/Error";
+import Error from "components/Appointment/Error"; */
 
 storiesOf("Button", module)
   .addParameters({
@@ -147,7 +147,7 @@ storiesOf("Appointment", module)
         .add("Appointment", () => <Appointment />)
         .add("Appointment with Time", () => (<Appointment time="12pm" />));
 
-        .add("Header", () => (
+/*         .add("Header", () => (
           <Header time="12pm" />
         ));
 
@@ -183,5 +183,5 @@ storiesOf("Appointment", module)
             message="Could not delete appointment"
             onClose={action("onClose")}
           />
-        ));
+        )); */
 
