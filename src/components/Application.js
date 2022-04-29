@@ -22,7 +22,8 @@ const days = [
   },
 ];
 
-const appointments = {
+const appointments = [
+  {
   "1": {
     id: 1,
     time: "12pm",
@@ -59,7 +60,8 @@ const appointments = {
     id: 5,
     time: "4pm",
   }
-};
+}
+];
 
 export default function Application(props) {
   const [day, setDay] = useState("Monday");
@@ -87,7 +89,7 @@ export default function Application(props) {
     />
     </section>
     <section className="schedule">
-      {appointments.map(appointment => (
+      {appointments && appointments.map(appointment => (
           <Appointment
             key={appointment.id}
             {...appointment}
