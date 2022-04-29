@@ -11,11 +11,11 @@ import DayList from "components/DayList";
 import InterviewerListItem from "components/InterviewerListItem";
 import InterviewerList from "components/InterviewerList";
 import Appointment from "components/Appointment";
-/* import Header from "components/Appointment/Header";
+import Header from "components/Appointment/Header";
 import Empty from "components/Appointment/Empty";
 import Show from "components/Appointment/Show";
 import Status from "components/Appointment/Status";
-import Error from "components/Appointment/Error"; */
+import Error from "components/Appointment/Error";
 
 storiesOf("Button", module)
   .addParameters({
@@ -194,5 +194,14 @@ storiesOf("InterviewerList", module)
             <Appointment time="5pm" />
           </Fragment>
         ))
-        
+        .add("Appointment Booked", () => (
+          <Fragment>
+            <Appointment
+              id={1}
+              time="4pm"
+              interview={{ student: "Lydia Miller-Jones", interviewer }}
+            />
+            <Appointment time="5pm" />
+          </Fragment>
+        ))
 
