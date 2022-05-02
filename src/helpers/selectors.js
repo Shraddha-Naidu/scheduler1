@@ -15,10 +15,21 @@ export function getInterview(state, interview) {
     return null
   }
 
-  let interviewObj= {
+  let interviewObject= {
     student: interview.student,
     interviewer: state.interviewers[interview.interviewer]
   };
 
-  return interviewObj;
+  return interviewObject;
+}
+
+export function getInterviewersForDay(state, day) {
+  let interviewers = [];
+
+  const filteredApp = state.days.filter(d => d.name === day);
+
+  if (filteredApp.length){
+    interviewers = filteredApp[0].interviewers.map(x => state.interviewers[x]);
+  }
+  return interviewers;
 }
