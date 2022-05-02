@@ -1,7 +1,9 @@
+//Uses state to return appointments for specific day
 export function getAppointmentsForDay(state, day) {
-  let appointments = [];
-
+  
   const filteredApp = state.days.filter(d => d.name === day);
+
+  let appointments = [];
 
   if (filteredApp.length){
     appointments = filteredApp[0].appointments.map(x => state.appointments[x]);
@@ -10,6 +12,7 @@ export function getAppointmentsForDay(state, day) {
   return appointments;
 }
 
+//Add interviewer info to an interview
 export function getInterview(state, interview) {
   if (!interview) {
     return null
@@ -23,13 +26,15 @@ export function getInterview(state, interview) {
   return interviewObject;
 }
 
+//Return interviewers for specific day
 export function getInterviewersForDay(state, day) {
-  let interviewers = [];
+  let dayInterviewers = [];//Returns array of interviewers
 
-  const filteredApp = state.days.filter(d => d.name === day);
+  const dayApp = state.days.filter(d => d.name === day);//Returns data filtered by day
 
-  if (filteredApp.length){
-    interviewers = filteredApp[0].interviewers.map(x => state.interviewers[x]);
+
+  for (const i of dayApp[0].interviewers) {
+    dayInterviewers.push(state.interviewers[i]);
   }
-  return interviewers;
+  return dayInterviewers;
 }
