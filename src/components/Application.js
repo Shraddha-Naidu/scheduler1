@@ -18,12 +18,37 @@ export default function Application(props) {
   });
 
   const setDay = day => setState({ ...state, day });
+
   const dailyAppointments = getAppointmentsForDay(state, state.day)
   const dailyInterviewers = getInterviewersForDay(state, state.day);
 
-  function bookInterview(id, interview) {
+  async function bookInterview(id, interview) {
     console.log(id, interview);
+
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    const res = await axios.put(`/api/appointments/${id}`, { interview });
+    setState({
+      ...state,
+      appointments
+    });
+    return res;
   };
+
+  function cancelInterview(id) {
+    return axios.delete(`/api/appointments/${id}`)
+      .then(() => {
+        setState({...state})
+      })
+  }
 
   const allAppointments = dailyAppointments.map( appointment => {
     const interview = getInterview(state, appointment.interview)
@@ -36,7 +61,7 @@ export default function Application(props) {
         interview={interview}
         interviewers={dailyInterviewers}
         bookInterview={bookInterview}
-        save={save}
+        cancelInterview={cancelInterview}
       />
     );
   })
@@ -58,6 +83,8 @@ export default function Application(props) {
       });
   }, [])
 
+  
+
   return (
     <main className="layout">
     <section className="sidebar">
@@ -71,7 +98,7 @@ export default function Application(props) {
       <DayList
         days={state.days}
         day={state.day}
-        setDay={setDay}
+        onChange={setDay}
       />
     </nav>
     <img
