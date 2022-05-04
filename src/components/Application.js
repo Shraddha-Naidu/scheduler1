@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 
 import "components/Application.scss";
 import DayList from "components/DayList.jsx";
@@ -7,6 +6,7 @@ import Appointment from "components/Appointment";
 import { getAppointmentsForDay } from "helpers/selectors";
 import { getInterview } from "helpers/selectors";
 import { getInterviewersForDay } from "helpers/selectors";
+import useApplicationData from "hooks/useApplicationData";
 
 
 export default function Application(props) {
@@ -16,39 +16,6 @@ export default function Application(props) {
     appointments: {},
     interviwers: {}
   });
-
-  const setDay = day => setState({ ...state, day });
-
-  const dailyAppointments = getAppointmentsForDay(state, state.day)
-  const dailyInterviewers = getInterviewersForDay(state, state.day);
-
-  async function bookInterview(id, interview) {
-    console.log(id, interview);
-
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview }
-    };
-
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
-
-    const res = await axios.put(`/api/appointments/${id}`, { interview });
-    setState({
-      ...state,
-      appointments
-    });
-    return res;
-  };
-
-  function cancelInterview(id) {
-    return axios.delete(`/api/appointments/${id}`)
-      .then(() => {
-        setState({...state})
-      })
-  }
 
   const allAppointments = dailyAppointments.map( appointment => {
     const interview = getInterview(state, appointment.interview)
@@ -65,23 +32,6 @@ export default function Application(props) {
       />
     );
   })
-
-  useEffect(() => {
-    Promise.all([
-      axios.get("/api/days"),
-      axios.get("/api/appointments"),
-      axios.get("/api/interviewers")
-    ])
-    .then((response) => {
-        console.log(response)
-        setState(prev => ({
-           ...prev,
-           days: response[0].data,
-           appointments: response[1].data,
-           interviwers: response[2].data
-           }));
-      });
-  }, [])
 
   
 
