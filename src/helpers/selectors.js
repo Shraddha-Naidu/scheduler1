@@ -4,7 +4,7 @@ export function getAppointmentsForDay(state, day) {
   state.days.forEach((dayOf) => {
     if (dayOf.name === day){
       dayOf.appointments.forEach((event) => {
-        newArr.push(state.appointments[event]);
+        appointmentsAvail.push(state.appointments[event]);
       });
     }
   });
