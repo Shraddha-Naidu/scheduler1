@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function useApplicationData() {
+export default function useApplcationData(){
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -9,6 +9,10 @@ export default function useApplicationData() {
     interviewers: {}
   });
 
+  //Sets state for day
+  const setDay = day => setState({ ...state, day });
+
+  //axios request
   useEffect(() => {
     Promise.all([
       axios.get("http://localhost:8001/api/days"),
@@ -26,26 +30,25 @@ export default function useApplicationData() {
       });
   }, [])
 
-  const setDay = day => setState({ ...state, day });
 
+ //Book new Interview
  function bookInterview(id, interview) {
   const appointment = {
     ...state.appointments[id],
     interview: { ...interview }
   };
-
   const appointments = {
     ...state.appointments,
     [id]: appointment
   };
-
   return axios.put(`/api/appointments/${id}`, appointment)
   .then((res) => {
     const days = spotUpdate(state.day, state.days, appointments);
     setState(prev => ({...prev, appointments, days}));
-  })
-};
+    })
+  }
 
+  //Cancel Appointment
 function cancelInterview(id) {
   const appointment = {
     ...state.appointments[id],
@@ -62,6 +65,7 @@ function cancelInterview(id) {
     })
   }
 
+  //Updates available spots
   function spotUpdate(day, days, appointments) {
     const dayObj = days.find(d => d.name === day);
     const apptID = dayObj.appointments;
