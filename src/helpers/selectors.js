@@ -1,37 +1,34 @@
-//Uses state to return appointments for specific day
 export function getAppointmentsForDay(state, day) {
-  const filteredAppointments = state.days.filter(d => d.name === day);
-
-  let appointments = [];
-
-  if (filteredAppointments.length){
-    appointments = filteredAppointments[0].appointments.map(x => state.appointments[x]);
-  }
-
-  return appointments;
-}
-
-//Return interviewers for specific day
-export function getInterviewersForDay(state, day) {
-  const allInterviewers = [];
+  const appArr = [];
   state.days.forEach((dayOf) => {
     if (dayOf.name === day){
-      dayOf.interviewers.forEach((event) => {
-        allInterviewers.push(state.interviewers[event]);
+      dayOf.appointments.forEach((event) => {
+        appArr.push(state.appointments[event]);
       });
     }
   });
-  return allInterviewers;
+  return appArr;
 }
 
-//Add interviewer info to an interview
+export function getInterviewersForDay(state, day) {
+  const intArr = [];
+  state.days.forEach((dayOf) => {
+    if (dayOf.name === day){
+      dayOf.interviewers.forEach((event) => {
+        intArr.push(state.interviewers[event]);
+      });
+    }
+  });
+  return intArr;
+}
+
 export function getInterview(state, interview) {
   if (!interview) {
     return null;
   }
-  let interviewObject = {};
-  interviewObject.student = interview.student;
-  interviewObject.interviewer = state.interviewers[interview.interviewer];
+  let interviewObj = {};
+  interviewObj.student = interview.student;
+  interviewObj.interviewer = state.interviewers[interview.interviewer];
 
-  return interviewObject;
+  return interviewObj;
 }
