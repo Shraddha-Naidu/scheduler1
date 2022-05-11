@@ -1,14 +1,14 @@
 //Uses state to return appointments for specific day
 export function getAppointmentsForDay(state, day) {
-  const allApps = [];
-  state.days.forEach((dayOf) => {
-    if (dayOf.name === day){
-      dayOf.appointments.forEach((event) => {
-        allApps.push(state.appointments[event]);
-      });
-    }
-  });
-  return allApps;
+  const filteredAppointments = state.days.filter(d => d.name === day);
+
+  let appointments = [];
+
+  if (filteredAppointments.length){
+    appointments = filteredAppointments[0].appointments.map(x => state.appointments[x]);
+  }
+
+  return appointments;
 }
 
 //Return interviewers for specific day
