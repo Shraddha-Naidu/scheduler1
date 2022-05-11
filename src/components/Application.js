@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import "components/Application.scss";
 import DayList from "components/DayList.jsx";
@@ -18,14 +18,14 @@ export default function Application(props) {
   } = useApplicationData();
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
-  
+
   const dailyInterviewers = getInterviewersForDay(state, state.day);
 
   const allAppointments = dailyAppointments.map(appointment => {
     const interview = getInterview(state, appointment.interview)
-  
+
     return(
-      <Appointment 
+      <Appointment
         key={appointment.id}
         id={appointment.id}
         time={appointment.time}
