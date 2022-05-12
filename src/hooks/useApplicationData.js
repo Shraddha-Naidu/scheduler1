@@ -25,7 +25,7 @@ export default function useApplcationData(){
            ...prev,
            days: response[0].data,
            appointments: response[1].data,
-           interviwers: response[2].data
+           interviewers: response[2].data
            }));
       });
   }, [])

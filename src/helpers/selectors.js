@@ -15,6 +15,8 @@ export function getInterviewersForDay(state, day) {
   state.days.forEach((dayOf) => {
     if (dayOf.name === day){
       dayOf.interviewers.forEach((event) => {
+        console.log(state)
+        console.log(event)
         intArr.push(state.interviewers[event]);
       });
     }
