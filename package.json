@@ -2,13 +2,12 @@
   "name": "scheduler",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8001",
   "dependencies": {
-    "axios": "^0.27.2",
+    "axios": "^0.26.1",
     "classnames": "^2.2.6",
     "normalize.css": "^8.0.1",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
     "react-scripts": "3.0.0"
   },
   "scripts": {
@@ -18,7 +17,7 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public --ci",
     "build-storybook": "build-storybook -s public",
-    "cypress:open": "cypress open"
+    "cypress": "cypress open"
   },
   "browserslist": {
     "production": [
@@ -42,17 +41,17 @@
     "@testing-library/jest-dom": "^4.0.0",
     "@testing-library/react": "^8.0.7",
     "@testing-library/react-hooks": "^7.0.2",
-    "@types/classnames": "^2.3.1",
     "babel-loader": "^8.0.5",
-    "cypress": "^9.6.0",
+    "cypress": "^9.5.3",
     "node-sass": "^4.14.0",
     "prop-types": "^15.8.1",
-    "react-test-renderer": "^16.14.0"
+    "react-test-renderer": "^16.13.0"
   },
   "jest": {
     "watchPathIgnorePatterns": [
       "<rootDir>/node_modules/",
       "<rootDir>/.git/"
     ]
-  }
+  },
+  "proxy": "http://localhost:8001"
 }
